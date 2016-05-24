@@ -17,9 +17,10 @@ Create Xcode project and add `UnityIntegration.xcconfig` which you can find in t
 As soon as we need to use files from previously generated iOS project, you can put the projects together in a common directory.
 
 Select project settings and choose that file to be used by your project:
-[](/imgs/1.png)
+
+![](imgs/1.png?raw=true "")
 
 Now choose `Target -> Build Settings` scroll down to the end of the list and change values of 
 `UNITY_IOS_EXPORTED_PATH` and `UNITY_RUNTIME_VERSION` to path of Unity-generated iOS project and version of Unity you use accordingly.
 
-[](/imgs/1.png)
+![](imgs/2.png?raw=true "")
