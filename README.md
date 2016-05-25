@@ -1,7 +1,7 @@
 # iOSUnityVuforiaGuide
 Integration of Unity 5.3 + Vuforia 5.5.9 project with native iOS application (Xcode 7.3)
 
-Inspired by [the-nerd.be/](https://the-nerd.be/) tutorials, by Frederik Jacques.
+Inspired by [the-nerd.be](https://the-nerd.be/) tutorials, by Frederik Jacques.
 
 Let's assume that you already have a Unity project which uses Vuforia SDK.
 
@@ -14,13 +14,13 @@ Add scene to build and generate iOS project from Unity project and after this st
 ##Step 1
 Create Xcode project and add `UnityIntegration.xcconfig` which you can find in this repo.
 
-As soon as we need to use files from previously generated iOS project, you can put the projects together in a common directory.
+As soon as we need to use files from previously Unity-generated iOS project, you can put the projects together in a common directory. Do not delete project generated with Unity even after all steps done. 
 
-Select project settings and choose that file to be used by your project:
+Select project's settings and choose `UnityIntegration.xcconfig` file to be used by your project:
 
 ![](imgs/1_1.png?raw=true "")
 
-Now choose `Target -> Build Settings` scroll down to the end of the list and change values of 
+Now choose `Target -> Build Settings`, scroll down to the end of the list and change values of 
 `UNITY_IOS_EXPORTED_PATH` and `UNITY_RUNTIME_VERSION` to path of Unity-generated iOS project and version of Unity you use accordingly.
 
 ![](imgs/1_2.png?raw=true "")
@@ -46,7 +46,7 @@ This operation could take few minutes as soon as there's a lot of files inside t
 
 ##Step 4
 
-Now lets's make some cleanup, so Xcode won't be lagging while processing a lot of not neeed files.
+Now let's make some cleanup, so Xcode won't be lagging while processing a lot of not neeed files.
 
 ###Step 4.1
 Inside `Classes` folder choose `Native` folder and search for `.h` files on the bottom of Navigator.
@@ -69,11 +69,11 @@ Again, make sure to press <em>`Remove References`</em>:
 Also we need to add some more files from previously Unity-generated iOS project.
 
 * Drag and drop inside the `Integration` group `Data` folder
-* Drag and drop inside the `Integration` group `QCAR` folder wich is in `Data/Raw/` folder`
+* Drag and drop inside the `Integration` group `QCAR` folder wich is in `Data/Raw/` folder
 
 Check if:
 * `Copy resources if needed` is <strong>unchecked</strong>
-*  But this time make sure to <strong>check</strong> <em>`Create folder references`</em>
+* `Create folder references` is <strong>checked</strong>
 
 ![](imgs/5_1.png?raw=true "")
 
@@ -122,19 +122,19 @@ Remove all code inside and insert the following:
 #endif
 ```
 
-Now in the `Build Settings` under `Apple LLVM 7.1 - Language` section, find field called `Prefix Header` and instead of `/ENTER/PATH/HERE` add path to previously created file `YOUR_PROJECT_NAME/PrefixHeader.pch` which in my case is:  `UnityIntegration/PrefixHeader.pch`
+Now in the `Build Settings` under `Apple LLVM 7.1 - Language` section, find the field called `Prefix Header` and instead of `/ENTER/PATH/HERE` add path to previously created file, e.g.: `YOUR_PROJECT_NAME/PrefixHeader.pch` which in my case is:  `UnityIntegration/PrefixHeader.pch`
 
 ![](imgs/7.png?raw=true "")
 
 ##Step 8
 
-Rename `main.m` to `main.mm` and `AppDelegate.m` to `AppDelegate.mm`
+Rename `Supporting Files/main.m` to `main.mm` and `AppDelegate.m` to `AppDelegate.mm`
 
 ![](imgs/8.png?raw=true "")
 
 ##Step 9
 
-Go to `Integration/Classes/main.mm` copy all code from this file and paste it instead of code in `Supporting Files/main.mm`
+Go to `Integration/Classes/main.mm`, copy all code from this file and paste it instead of code in `Supporting Files/main.mm`
 
 Now, in `Supporting Files/main.mm` change line: `const char* AppControllerClassName = "UnityAppController";`
 
@@ -142,7 +142,7 @@ with: `const char* AppControllerClassName = "AppDelegate";`
 
 ##Step 10
 
-Go to `Build Settings` search for `"main"` and in `Compile Sources` section and remove file which corresponds to `Classes` folder:
+Go to `Build Settings`, search for `"main"` and in `Compile Sources` section remove file which corresponds to `Classes` folder:
 
 ![](imgs/10.png?raw=true "")
 
@@ -171,7 +171,6 @@ NS_INLINE UnityAppController* GetAppController()
 	return currentUnityController;
 }
 ```
-
 
 Inside `UnityAppController.mm` file make the following changes:
 
@@ -227,12 +226,13 @@ In `ViewController.m` add the following parts:
 In this repo you can find both `AppDelegate.h` and `AppDelegate.mm` files and paste their content into your files.
 Shortly, what is going on in those files:
 
-* We create 2 `UIWindow` instances for main andUnity content
+* We create 2 `UIWindow` instances for main and Unity content
 * to switch between those windows we use `- (void)showUnityWindow` and  `- (void)hideUnityWindow` methods
 * also we have instance `unityController` of `UnityAppController` type, because we took away control from Unity-generated app delegate and we need to pass calls to it through our app delegate
+* in `(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions ` we create those windows, root view controller, navigation controller etc. so app will work properly
 
 #Final
-Building and running the app will show something like this: we press `Show Unity` button, it opens Unity+Vuforia view which recognizes the marker well and nice yellow button in center which can bring us back to previous view controller 
+Building and running the app will show something like this: we press `Show Unity` button, it opens Unity+Vuforia view which recognizes the marker well and shows nice yellow button in center, which can bring us back to previous view controller 
 
 
 ### Useful links
