@@ -68,13 +68,18 @@ Again, make sure to press <em>`Remove References`</em>:
 ##Step 5
 Also we need to add some more files from previously Unity-generated iOS project.
 
-Drag and drop inside the `Integration` group `Data` folder.
+* Drag and drop inside the `Integration` group `Data` folder
+* Drag and drop inside the `Integration` group `QCAR` folder wich is in `Data/Raw/` folder`
 
 Check if:
 * `Copy resources if needed` is <strong>unchecked</strong>
 *  But this time make sure to <strong>check</strong> <em>`Create folder references`</em>
 
-![](imgs/5.png?raw=true "")
+![](imgs/5_1.png?raw=true "")
+
+So you will have something like this:
+
+![](imgs/5_2.png?raw=true "")
 
 
 ##Step 6
@@ -129,4 +134,111 @@ Rename `main.m` to `main.mm` and `AppDelegate.m` to `AppDelegate.mm`
 
 ##Step 9
 
+Go to `Integration/Classes/main.mm` copy all code from this file and paste it instead of code in `Supporting Files/main.mm`
+
+Now, in `Supporting Files/main.mm` change line: `const char* AppControllerClassName = "UnityAppController";`
+
+with: `const char* AppControllerClassName = "AppDelegate";`
+
+##Step 10
+
+Go to `Build Settings` search for `"main"` and in `Compile Sources` section and remove file which corresponds to `Classes` folder:
+
+![](imgs/10.png?raw=true "")
+
+##Step 11
+
+Inside `UnityAppController.h` file make the following changes:
+
+Comment part:
+
+```
+inline UnityAppController*	GetAppController()
+{
+	return (UnityAppController*)[UIApplication sharedApplication].delegate;
+}
+
+```
+
+and paste instead:
+
+
+```
+NS_INLINE UnityAppController* GetAppController()
+{
+	NSObject<UIApplicationDelegate>* delegate = [UIApplication sharedApplication].delegate;
+	UnityAppController* currentUnityController = (UnityAppController *)[delegate valueForKey:@"unityController"];
+	return currentUnityController;
+}
+```
+
+
+Inside `UnityAppController.mm` file make the following changes:
+
+`#import "AppDelegate.h"`
+
+Replace empty `- (void)shouldAttachRenderDelegate` method with: 
+
+```
+- (void)shouldAttachRenderDelegate	{
+
+	AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+	[delegate shouldAttachRenderDelegate];
+	
+}
+```
+
+##Step 12
+Inside `VuforiaNativeRendererController.mm` file comment last line:
+`IMPL_APP_CONTROLLER_SUBCLASS(VuforiaNativeRendererController)`
+
+##Step 13
+Let's create a button which will open Unity+Vuforia view inside our app.
+
+In `ViewController.m` add the following parts:
+
+`#import "AppDelegate.h"`
+
+`@property (nonatomic, strong) UIButton *showUnityButton;`
+
+```
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	self.view.backgroundColor = [UIColor blueColor];
+	
+	self.showUnityButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	[self.showUnityButton setTitle:@"SHOW UNITY" forState:UIControlStateNormal];
+	self.showUnityButton.frame = CGRectMake(0, 0, 100, 44);
+	self.showUnityButton.center = self.view.center;
+	
+	[self.view addSubview:self.showUnityButton];
+	
+	[self.showUnityButton addTarget:self action:@selector(showUnityButton:) forControlEvents:UIControlEventTouchUpInside];
+	
+}
+
+- (void)showUnityButton: (UIButton *) sender {
+	[(AppDelegate *)[UIApplication sharedApplication].delegate showUnityWindow];
+}
+```
+
+##Step 14
+
+In this repo you can find both `AppDelegate.h` and `AppDelegate.mm` files and paste their content into your files.
+Shortly, what is going on in those files:
+
+* We create 2 `UIWindow` instances for main andUnity content
+* to switch between those windows we use `- (void)showUnityWindow` and  `- (void)hideUnityWindow` methods
+* also we have instance `unityController` of `UnityAppController` type, because we took away control from Unity-generated app delegate and we need to pass calls to it through our app delegate
+* in `- (void)shouldAttachRenderDelegate` we handle Vuforia integration
+
+#Final
+Building and running the app will show something like this: we press `Show Unity` button, it opens Unity+Vuforia view which recognizes the marker well and nice yellow button in center which can bring us back to previous view controller 
+
+
+### Useful links
+
+* [](https://the-nerd.be/2015/11/13/integrate-unity-5-in-a-native-ios-app-with-xcode-7/)
+* [](http://www.makethegame.net/unity/add-unity3d-to-native-ios-app-with-unity-5-and-vuforia-4-x/)
+* [](https://github.com/blitzagency/ios-unity5)
 
