@@ -230,7 +230,6 @@ Shortly, what is going on in those files:
 * We create 2 `UIWindow` instances for main andUnity content
 * to switch between those windows we use `- (void)showUnityWindow` and  `- (void)hideUnityWindow` methods
 * also we have instance `unityController` of `UnityAppController` type, because we took away control from Unity-generated app delegate and we need to pass calls to it through our app delegate
-* in `- (void)shouldAttachRenderDelegate` we handle Vuforia integration
 
 #Final
 Building and running the app will show something like this: we press `Show Unity` button, it opens Unity+Vuforia view which recognizes the marker well and nice yellow button in center which can bring us back to previous view controller 
