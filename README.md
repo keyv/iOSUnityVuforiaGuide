@@ -83,4 +83,50 @@ Add frameworks to the project, so the list will look like this:
 
 ![](imgs/6.png?raw=true "")
 
+##Step 7
+
+Create `PrefixHeader.pch` file: `File -> New -> Other -> PCH file`
+
+Remove all code inside and insert the following: 
+
+```
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#endif
+
+#include "Preprocessor.h"
+#include "UnityTrampolineConfigure.h"
+#include "UnityInterface.h"
+
+#ifndef __OBJC__
+#if USE_IL2CPP_PCH
+#include "il2cpp_precompiled_header.h"
+#endif
+#endif
+
+#ifndef TARGET_IPHONE_SIMULATOR
+#define TARGET_IPHONE_SIMULATOR 0
+#endif
+
+#define printf_console printf
+
+#endif
+```
+
+Now in the `Build Settings` under `Apple LLVM 7.1 - Language` section, find field called `Prefix Header` and instead of `/ENTER/PATH/HERE` add path to previously created file `YOUR_PROJECT_NAME/PrefixHeader.pch` which in my case is:  `UnityIntegration/PrefixHeader.pch`
+
+![](imgs/7.png?raw=true "")
+
+##Step 8
+
+Rename `main.m` to `main.mm` and `AppDelegate.m` to `AppDelegate.mm`
+
+![](imgs/8.png?raw=true "")
+
+##Step 9
+
 
