@@ -24,3 +24,10 @@ Now choose `Target -> Build Settings` scroll down to the end of the list and cha
 `UNITY_IOS_EXPORTED_PATH` and `UNITY_RUNTIME_VERSION` to path of Unity-generated iOS project and version of Unity you use accordingly.
 
 ![](imgs/2.png?raw=true "")
+
+##Step 2
+
+Add frameworks to the project, so the list will look like this:
+![](imgs/3.png?raw=true "")
+
+
