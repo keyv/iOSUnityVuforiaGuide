@@ -237,7 +237,7 @@ Building and running the app will show something like this: we press `Show Unity
 
 ### Useful links
 
-* [](https://the-nerd.be/2015/11/13/integrate-unity-5-in-a-native-ios-app-with-xcode-7/)
-* [](http://www.makethegame.net/unity/add-unity3d-to-native-ios-app-with-unity-5-and-vuforia-4-x/)
-* [](https://github.com/blitzagency/ios-unity5)
+* [https://the-nerd.be/2015/11/13/integrate-unity-5-in-a-native-ios-app-with-xcode-7/](https://the-nerd.be/2015/11/13/integrate-unity-5-in-a-native-ios-app-with-xcode-7/)
+* [http://www.makethegame.net/unity/add-unity3d-to-native-ios-app-with-unity-5-and-vuforia-4-x/](http://www.makethegame.net/unity/add-unity3d-to-native-ios-app-with-unity-5-and-vuforia-4-x/)
+* [https://github.com/blitzagency/ios-unity5](https://github.com/blitzagency/ios-unity5)
 
