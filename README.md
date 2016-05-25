@@ -26,8 +26,20 @@ Now choose `Target -> Build Settings` scroll down to the end of the list and cha
 ![](imgs/2.png?raw=true "")
 
 ##Step 2
+Remove `Main.storyboard` from Xcode project.
+Also, in `Info.plist` remove `Main storyboard file base name` row:
+
+![](imgs/3.png?raw=true "")
+
+##Step 4
+Create new group, let's call it "Integration".
+Drag and drop inside thisgroup `Classes` and `Libraries` folders from previously Unity-generated iOS.
+Make sure, that "Copy resources if needed" is <em>unchecked</em>. This could take few minutes, as soon as there's a lot of files inside the folders.
+![](imgs/4.png?raw=true "")
+
+##Step 4
 
 Add frameworks to the project, so the list will look like this:
-![](imgs/3.png?raw=true "")
+![](imgs/5.png?raw=true "")
 
 
