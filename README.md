@@ -34,9 +34,9 @@ Also, in `Info.plist` remove `Main storyboard file base name` row:
 ##Step 3
 Create new group, let's call it `"Integration"`.
 
-Drag and drop inside thisgroup `Classes` and `Libraries` folders from previously Unity-generated iOS project.
+Drag and drop inside this group `Classes` and `Libraries` folders from previously Unity-generated iOS project.
 
-Make sure, that 
+Make sure, that:
 * `Copy resources if needed` is <strong>unchecked</strong>
 * `Create groups` is <strong>checked</strong>
 
@@ -65,9 +65,22 @@ Again, make sure to press <em>`Remove References`</em>:
 
 ![](imgs/4_2.png?raw=true "")
 
-##Step N
+##Step 5
+Also we need to add some more files from previously Unity-generated iOS project.
+
+Drag and drop inside the `Integration` group `Data` folder.
+
+Check if:
+* `Copy resources if needed` is <strong>unchecked</strong>
+*  But this time make sure to <strong>check</strong> <em>`Create folder references`</em>
+
+![](imgs/5.png?raw=true "")
+
+
+##Step 6
 
 Add frameworks to the project, so the list will look like this:
-![](imgs/5.png?raw=true "")
+
+![](imgs/6.png?raw=true "")
 
 
