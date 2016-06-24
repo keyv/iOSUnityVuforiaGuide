@@ -142,7 +142,7 @@ with: `const char* AppControllerClassName = "AppDelegate";`
 
 ##Step 10
 
-Go to `Build Settings`, search for `"main"` and in `Compile Sources` section remove file which corresponds to `Classes` folder:
+Go to `Build Phases`, search for `"main"` and in `Compile Sources` section remove file which corresponds to `Classes` folder:
 
 ![](imgs/10.png?raw=true "")
 
