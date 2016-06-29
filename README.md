@@ -191,6 +191,10 @@ Replace empty `- (void)shouldAttachRenderDelegate` method with:
 Inside `VuforiaNativeRendererController.mm` file comment last line:
 `IMPL_APP_CONTROLLER_SUBCLASS(VuforiaNativeRendererController)`
 
+<strong>NOTE:</strong> If you change something inside your Unity Project, choose Build -> Append.
+
+After that you need to comment this line in `VuforiaNativeRendererController.mm` again
+
 ##Step 13
 Let's create a button which will open Unity+Vuforia view inside our app.
 
